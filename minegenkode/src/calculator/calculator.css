@@ -1,0 +1,12 @@
+.Buttons:hover{
+    -fx-background-color: #E1E1E1;
+}
+
+.Buttons{
+    -fx-background-color: #F0F0F0;
+    -fx-background-radius: 0;
+}
+
+.VBox{
+    -fx-background-color: #D3D3D3;
+}
