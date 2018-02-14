@@ -37,5 +37,4 @@ public class CardDeckController {
 		cardDeck.shufflePerfectly();
 		update();
 	}
-
 }
