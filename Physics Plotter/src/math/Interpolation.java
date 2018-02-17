@@ -56,11 +56,12 @@ public class Interpolation {
 	 *  - double[] x: array of x coordinates in strictly increasing order
 	 *  - double[] y: array of y coordinates at x coordinate specified in fist array
 	 */
-	private static double[][] parseFile(String filepath) throws FileNotFoundException {
+	private static void parseFile(String filepath) throws FileNotFoundException {
 		//Local variables
 		Scanner input = new Scanner(new FileReader(filepath));
 		StringBuilder stringBuilder = new StringBuilder();
 		
+		//Read file to StringBuilder object
 		while (input.hasNext())
 			stringBuilder.append(input.nextLine() + "\n");
 		input.close();
@@ -68,9 +69,16 @@ public class Interpolation {
 		//Convert StringBuilder object to string
 		String fileString = stringBuilder.toString();
 		
+		//Convert dataset to array of strings
+		String[] fileArray = fileString.split("\n");
+		
+		for (int i = 2; i < fileArray.length; i++)
+			System.out.println(fileArray[i]);
+					//.split("\t")[2]);
 		
 	}
 	
-	
-	
+	public static void main(String[] args) throws FileNotFoundException {
+		parseFile("C:\\Users\\Patrik\\git\\Patrik-Forked\\Physics Plotter\\src\\exports\\mass_A.txt");
+	}
 }

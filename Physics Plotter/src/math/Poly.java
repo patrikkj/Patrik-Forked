@@ -1,5 +1,7 @@
 package math;
 
+import java.util.HashMap;
+
 public class Poly {
 	/*
 	 * Evaluates polyonmial represented by an array of coefficients, using Horner's method
@@ -113,6 +115,7 @@ public class Poly {
 	 * Returns a string representing the polynomial described by the coefficient array
 	 */
 	public static String toString(double[] coeffArray, boolean includeZeroCoeffs) {
+		HashMap<Integer, String> unicodeExp = new HashMap<>();
 		//Degree of polynomial
 		int degree = coeffArray.length - 1;
 		
