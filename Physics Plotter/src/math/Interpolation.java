@@ -1,17 +1,53 @@
 package math;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
+import org.apache.commons.math3.analysis.polynomials.PolynomialFunction;
 import org.apache.commons.math3.analysis.polynomials.PolynomialFunctionLagrangeForm;
+import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;
 
 
 public class Interpolation {
-	private boolean validateDataset(File filepath) {
-		return true;
+	/*
+	 * Returns a PolySpline object representing a set of third degree polynomials,
+	 * replicating a best-fit curve to the given set of coordinates.
+	 * Input parameters:
+	 *  - double[] x: array of x coordinates in strictly increasing order
+	 *  - double[] y: array of y coordinates at x coordinate specified in fist array
+	 */
+	public static PolySpline polynomialSplineInterpolation(double[] x, double[] y) {
+		//Validate array lengths
+		if (x.length != y.length)
+			throw new IllegalArgumentException("Arrays of x and y coordinates must be of equal length.");
+		
+		//Validate x coordinate array
+		for (int i = 0; i < x.length - 1; i++)
+			if (x[i] >= x[i+1])
+				throw new IllegalArgumentException("Values in array of x coordinates must be strictly increasing.");
+		
+		//Perform interpolation
+		return new PolySpline(new SplineInterpolator().interpolate(x, y), 3);
 	}
+	
+	/*
+	 * Returns a PolySpline object representing a set of third degree polynomials,
+	 * replicating a best-fit curve to the given set of coordinates.
+	 * Input parameters:
+	 *  - String filepath: Absolute filepath to standard Tracker export file (.txt)
+	 */
+	public static PolySpline polynomialSplineInterpolation(String filepath) throws FileNotFoundException {
+		//Parse tracking data from filepath to two arrays of doubles.
+		double[][] fileData = parseFile(filepath);
+
+		//Perform interpolation
+		return polynomialSplineInterpolation(fileData[0], fileData[1]);
+	}
+	
 	
 	/*
 	 * Returns an array of coefficients, corresponding to an N-1 degree polynomial interpolation.
@@ -30,24 +66,37 @@ public class Interpolation {
 			if (x[i] >= x[i+1])
 				throw new IllegalArgumentException("Values in array of x coordinates must be strictly increasing.");
 		
+		//Perform interpolation
 		PolynomialFunctionLagrangeForm rawPolynomial = new PolynomialFunctionLagrangeForm(x, y);
 		
-		return rawPolynomial.getCoefficients();
+		//Get disordered coefficients from polynomial
+		double[] coeffArray = rawPolynomial.getCoefficients();
+		
+		//Convert coefficient array to list in order to reverse
+		ArrayList<Double> coeffList = new ArrayList<Double>();
+		for (double doub : coeffArray) coeffList.add(doub);
+		
+		//Reverse list order
+		Collections.reverse(coeffList);
+		
+		//Return coefficients as a primitive array
+		return coeffList.stream().mapToDouble(doub -> doub.doubleValue()).toArray();
 	}
 	
 	/*
 	 * Returns an array of coefficients, corresponding to an N-1 degree polynomial interpolation.
-	 * 
-	 * update from here
-	 * 
 	 * NOTE: Arrays of x and y coordinates must be of equal length
 	 * Input parameters:
-	 *  - double[] x: array of x coordinates in strictly increasing order
-	 *  - double[] y: array of y coordinates at x coordinate specified in fist array
+	 *  - String filepath: Absolute filepath to standard Tracker export file (.txt)
 	 */
-	public static double[] polynomialInterpolation(File filepath) {
-		return new double[1];
+	public static double[] polynomialInterpolation(String filepath) throws FileNotFoundException {
+		//Parse tracking data from filepath to two arrays of doubles.
+		double[][] fileData = parseFile(filepath);
+		
+		//Return coefficient array from interpolation
+		return polynomialInterpolation(fileData[0], fileData[1]);
 	}
+	
 	
 	/*
 	 * Parses tracking data from filepath to two arrays of doubles.
@@ -56,7 +105,7 @@ public class Interpolation {
 	 *  - double[] x: array of x coordinates in strictly increasing order
 	 *  - double[] y: array of y coordinates at x coordinate specified in fist array
 	 */
-	private static void parseFile(String filepath) throws FileNotFoundException {
+	private static double[][] parseFile(String filepath) throws FileNotFoundException {
 		//Local variables
 		Scanner input = new Scanner(new FileReader(filepath));
 		StringBuilder stringBuilder = new StringBuilder();
@@ -72,13 +121,34 @@ public class Interpolation {
 		//Convert dataset to array of strings
 		String[] fileArray = fileString.split("\n");
 		
-		for (int i = 2; i < fileArray.length; i++)
-			System.out.println(fileArray[i]);
-					//.split("\t")[2]);
+		//Initialize output arrays
+		List<Double> outputX = new ArrayList<Double>();
+		List<Double> outputY = new ArrayList<Double>();
 		
+		for (int i = 2; i < fileArray.length; i++) {
+			String[] lineArray = fileArray[i].split("\t");
+			
+			//Append values to output arrays
+			outputX.add(Double.parseDouble(lineArray[1]));
+			outputY.add(Double.parseDouble(lineArray[2]));
+		}
+		
+		//Map to primitive type
+		double[] primitiveX = outputX.stream().mapToDouble(doub -> doub.doubleValue()).toArray();
+		double[] primitiveY = outputY.stream().mapToDouble(doub -> doub.doubleValue()).toArray();
+		
+		return new double[][] { primitiveX, primitiveY };
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		parseFile("C:\\Users\\Patrik\\git\\Patrik-Forked\\Physics Plotter\\src\\exports\\mass_A.txt");
+		PolySpline polySpline = polynomialSplineInterpolation("C:\\Users\\Patrik\\git\\Patrik-Forked\\Physics Plotter\\src\\exports\\mass_A.txt");
+		
+		for (double x = 0.132; x < 1.44; x += 0.001) {
+			System.out.printf("x: %.3f \t\t y: %s\n", x, polySpline.eval(x));
+		}
+		
+		System.out.println(polySpline.toString(true, true));
+		System.out.println(polySpline.derivative().toString(true, true));
+		
 	}
 }
