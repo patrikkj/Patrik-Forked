@@ -1,4 +1,4 @@
-package math;
+package analysis;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,9 +7,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-import org.apache.commons.math3.analysis.polynomials.PolynomialFunction;
-import org.apache.commons.math3.analysis.polynomials.PolynomialFunctionLagrangeForm;
 import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;
+import org.apache.commons.math3.analysis.polynomials.PolynomialFunctionLagrangeForm;
+
+import functions.PolySpline;
 
 
 public class Interpolation {
@@ -141,7 +142,7 @@ public class Interpolation {
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		PolySpline polySpline = polynomialSplineInterpolation("C:\\Users\\Patrik\\git\\Patrik-Forked\\Physics Plotter\\src\\exports\\mass_A.txt");
+		PolySpline polySpline = polynomialSplineInterpolation("C:\\Users\\Patrik\\git\\Patrik-Forked\\Physics Plotter\\src\\imports\\mass_A.txt");
 		
 		for (double x = 0.132; x < 1.44; x += 0.001) {
 			System.out.printf("x: %.3f \t\t y: %s\n", x, polySpline.eval(x));

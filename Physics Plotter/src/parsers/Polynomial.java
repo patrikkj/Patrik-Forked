@@ -1,9 +1,9 @@
-package math;
+package parsers;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Poly {
+public class Polynomial {
 	private static double[] samplePoly1 = new double[] {1, 2, 3, 4};
 	private static double[] samplePoly2 = new double[] {-1, -2, -3, -4};
 	private static double[] samplePoly3 = new double[] {-1, 2, -3, 4};
@@ -115,7 +115,7 @@ public class Poly {
 		
 		return Math.pow((1 + Math.pow(dy_dx_1, 2)), 3/2) / dy_dx_2;
 	}
-
+	
 	
 	//Other
 	/*

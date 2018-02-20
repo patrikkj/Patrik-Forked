@@ -1,4 +1,4 @@
-package math;
+package functions;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,8 +6,10 @@ import java.util.Collections;
 import org.apache.commons.math3.analysis.polynomials.PolynomialFunction;
 import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
 
+import parsers.Polynomial;
 
-public class PolySpline {
+
+public class PolySpline implements Differentiable {
 	//Instance variables
 	private PolynomialSplineFunction polySpline;
 	private int degree;
@@ -17,7 +19,7 @@ public class PolySpline {
 	public PolySpline(PolynomialSplineFunction polySpline, int degree) {
 		this.polySpline = polySpline;
 	}
-
+	
 	
 	//Evaluations
 	/*
@@ -84,7 +86,7 @@ public class PolySpline {
 	 * The sign of the radius of the osculating circle, is the same as that of the second derivative
 	 * https://en.wikipedia.org/wiki/Radius_of_curvature
 	 */
-	public double radiusOfCurvature(double[] coeffArray, double x) {
+	public double radiusOfCurvature(double x) {
 		double dy_dx_1 = evalDerivative(x);
 		double dy_dx_2 = evalDerivativeII(x);
 		
@@ -124,7 +126,7 @@ public class PolySpline {
 			double[] correctArray = coeffList.stream().mapToDouble(doub -> doub.doubleValue()).toArray();
 			
 			//Append parsed string to StringBuilder object
-			stringBuilder.append(Poly.toString(correctArray, includeZeroCoeffs, addPadding) + "\n");
+			stringBuilder.append(Polynomial.toString(correctArray, includeZeroCoeffs, addPadding) + "\n");
 		}
 		
 		//Return concatinated StringBuilder

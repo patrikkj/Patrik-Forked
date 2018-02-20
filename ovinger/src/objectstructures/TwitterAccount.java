@@ -51,7 +51,7 @@ public class TwitterAccount {
 	public boolean isFollowedBy(TwitterAccount account) {
 		return account.isFollowing(this);
 	}
-
+	
 	
 	//Actions
 	public void follow(TwitterAccount account) {
@@ -84,7 +84,6 @@ public class TwitterAccount {
 			//If this is the first retweet in the chain
 			tweet.getOwner().retweetCount++;
 	}
-	
 	
 	
 	//Other

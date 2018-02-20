@@ -1,4 +1,4 @@
-package math;
+package analysis;
 
 import java.time.LocalTime;
 
