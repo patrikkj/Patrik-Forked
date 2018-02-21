@@ -16,5 +16,6 @@ public interface Differentiable {
 	public double radiusOfCurvature(double x);
 	
 	//Other
-	public String toString();
+	public double[] getDomain();
+	public String toString(boolean includeZeroCoeffs, boolean addPadding);
 }

@@ -11,6 +11,7 @@ import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;
 import org.apache.commons.math3.analysis.polynomials.PolynomialFunctionLagrangeForm;
 
 import functions.PolySpline;
+import functions.Polynomial;
 
 
 public class Interpolation {
@@ -32,7 +33,7 @@ public class Interpolation {
 				throw new IllegalArgumentException("Values in array of x coordinates must be strictly increasing.");
 		
 		//Perform interpolation
-		return new PolySpline(new SplineInterpolator().interpolate(x, y), 3);
+		return new PolySpline(new SplineInterpolator().interpolate(x, y));
 	}
 	
 	/*
@@ -57,7 +58,7 @@ public class Interpolation {
 	 *  - double[] x: array of x coordinates in strictly increasing order
 	 *  - double[] y: array of y coordinates at x coordinate specified in fist array
 	 */
-	public static double[] polynomialInterpolation(double[] x, double[] y) {
+	public static Polynomial polynomialInterpolation(double[] x, double[] y) {
 		//Validate array lengths
 		if (x.length != y.length)
 			throw new IllegalArgumentException("Arrays of x and y coordinates must be of equal length.");
@@ -71,17 +72,23 @@ public class Interpolation {
 		PolynomialFunctionLagrangeForm rawPolynomial = new PolynomialFunctionLagrangeForm(x, y);
 		
 		//Get disordered coefficients from polynomial
-		double[] coeffArray = rawPolynomial.getCoefficients();
+		double[] coeffArrayDisordered = rawPolynomial.getCoefficients();
 		
 		//Convert coefficient array to list in order to reverse
 		ArrayList<Double> coeffList = new ArrayList<Double>();
-		for (double doub : coeffArray) coeffList.add(doub);
+		for (double doub : coeffArrayDisordered) coeffList.add(doub);
 		
 		//Reverse list order
 		Collections.reverse(coeffList);
 		
-		//Return coefficients as a primitive array
-		return coeffList.stream().mapToDouble(doub -> doub.doubleValue()).toArray();
+		//Represent coefficients as a primitive array
+		double[] coeffArray =  coeffList.stream().mapToDouble(doub -> doub.doubleValue()).toArray();
+		
+		//Get function domain
+		double[] domain = new double[] { x[0], x[x.length - 1] };
+		
+		//Return a Polynomail function
+		return new Polynomial(coeffArray, domain);
 	}
 	
 	/*
@@ -90,7 +97,7 @@ public class Interpolation {
 	 * Input parameters:
 	 *  - String filepath: Absolute filepath to standard Tracker export file (.txt)
 	 */
-	public static double[] polynomialInterpolation(String filepath) throws FileNotFoundException {
+	public static Polynomial polynomialInterpolation(String filepath) throws FileNotFoundException {
 		//Parse tracking data from filepath to two arrays of doubles.
 		double[][] fileData = parseFile(filepath);
 		

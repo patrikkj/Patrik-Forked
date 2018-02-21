@@ -12,12 +12,17 @@ import parsers.Polynomial;
 public class PolySpline implements Differentiable {
 	//Instance variables
 	private PolynomialSplineFunction polySpline;
-	private int degree;
+	private double[] domain;
 	
 	
 	//Constructor
-	public PolySpline(PolynomialSplineFunction polySpline, int degree) {
+	public PolySpline(PolynomialSplineFunction polySpline) {
 		this.polySpline = polySpline;
+		
+		// Set domain restrictions
+		double[] xValues = polySpline.getKnots();
+		domain = new double[] { xValues[0], xValues[xValues.length - 1] };
+		
 	}
 	
 	
@@ -49,7 +54,7 @@ public class PolySpline implements Differentiable {
 	 * Returns a PolySpline object representing the first derivative of this function
 	 */
 	public PolySpline derivative() {
-		return new PolySpline(polySpline.polynomialSplineDerivative(), degree - 1);
+		return new PolySpline(polySpline.polynomialSplineDerivative());
 	}
 	
 	/*
@@ -99,11 +104,9 @@ public class PolySpline implements Differentiable {
 	
 	
 	//Others
-	/*
-	 * Returns the degree of this polynomial spline function
-	 */
-	public int getDegree() {
-		return degree;
+	/**Returns the domain of this polynomial spline function*/
+	public double[] getDomain() {
+		return domain;
 	}
 	
 	/*

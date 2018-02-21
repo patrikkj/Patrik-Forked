@@ -3,6 +3,7 @@ package functions;
 public class Polynomial implements Differentiable {
 	//Instaice variables
 	private double[] coeffArray;
+	private double[] domain;
 	
 	
 	//Constructor
@@ -10,8 +11,9 @@ public class Polynomial implements Differentiable {
 	 * Creates a Polynomial object described by the input coefficient array.
 	 * NOTE: Coefficcents must be given in descending order of degrees
 	 */
-	public Polynomial(double[] coeffArray) {
+	public Polynomial(double[] coeffArray, double[] domain) {
 		this.coeffArray = coeffArray;
+		this.domain = domain;
 	}
 	
 	/*
@@ -58,7 +60,7 @@ public class Polynomial implements Differentiable {
 		for (int i = 0; i < derivativeArray.length; i++)
 			derivativeArray[i] = coeffArray[i] * (coeffArray.length - i - 1);
 		
-		return new Polynomial(derivativeArray);
+		return new Polynomial(derivativeArray, domain);
 	}
 	
 	/*
@@ -117,4 +119,15 @@ public class Polynomial implements Differentiable {
 		
 		return Math.pow((1 + Math.pow(dy_dx_1, 2)), 3/2) / dy_dx_2;
 	}
+
+	/**Returns the domain of this polynomial*/
+	public double[] getDomain() {
+		return domain;
+	}
+	
+	/**Returns a string representation of Polynomial*/
+	public String toString(boolean includeZeroCoeffs, boolean addPadding) {
+		return parsers.Polynomial.toString(coeffArray, includeZeroCoeffs, addPadding);
+	}
+		
 }
