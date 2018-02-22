@@ -8,38 +8,33 @@ import functions.Differentiable;
 import functions.PolySpline;
 
 public class Trace {
-	// Instance variables
-	private Differentiable func;	//Interpolation (analysis.Interpolation)
-	private double mass;			//Mass of rolling object
-	private double c;				//Constant for calculating moment of inertia
-	private double v0;				//Initial velocity
-	private double x0;				//Initial x-coordinate
-	private double step;			//Step size for numerical integration (Eulers' method)
-	private double[] domain;		//Automatically assigned function domain
+	// Instance variables (Check constructor comment for details)
+	private Differentiable func;
+	private double m, c, v0, x0, step;
+	private double[] domain;		
 	
 	// Constants
-	public static final double C_SPHERE = 2d/5d, C_SPHERE_HOLLOW = 2d/3d;
-	public static final double G_CONST = 9.81;
-	
+	public static final double SPHERE = 2d/5d, SPHERE_HOLLOW = 2d/3d;
+	public static final double G = 9.81;
 	
 	// Constructor
 	/**
 	 * Creates a Trace object used for numerical analysis
 	 * 
 	 * @param func - Differentiable interpolation of track (analysis.Interpolation)
-	 * @param mass - Mass of rolling object (kg)
-	 * @param c - Constant for calculating moment of inertia (predefined in Trace.C_SHAPE)
+	 * @param m - Mass of rolling object (kg)
+	 * @param c - Constant for calculating moment of inertia (predefined in Trace.SHAPES)
 	 * @param v0 - Initial velocity (m/s)
 	 * @param x0 - Initial x-coordinate
 	 * @param step - Step size for numerical integration (Eulers' method)
 	 */
-	public Trace(Differentiable func, double mass, double c, double v0, double x0, double step) {
+	public Trace(Differentiable func, double m, double c, double v0, double x0, double step) {
 		//Validate initial x-value
 		if (x0 < func.getDomain()[0]  ||  x0 > func.getDomain()[1])
 			throw new IllegalArgumentException("Initial x value must be within function domain.");
 		
 		//Validate mass
-		if (mass <= 0)
+		if (m <= 0)
 			throw new IllegalArgumentException("Mass must be positive.");
 		
 		//Validate c
@@ -52,7 +47,7 @@ public class Trace {
 
 		//Assign values
 		this.func = func;
-		this.mass = mass;
+		this.m = m;
 		this.c = c;
 		this.v0 = v0;
 		this.x0 = x0;
@@ -61,13 +56,14 @@ public class Trace {
 	}
 	
 	
+	//Calculations
 	/**Method for evaulating the acceleration at given value of x*/
 	public double getAccel(double x) {
 		// Evaluates the slope angle α(x) 
 		double angle = func.slopeAngle(x);
 		
 		// Numerator: g * sin α(x)				| 
-		double numerator = G_CONST * Math.sin(angle);
+		double numerator = G * Math.sin(angle);
 		
 		// Formula for moment of inertia: I₀ = c * mr²
 		// Denominator: 1 + I₀ / mr²
@@ -79,13 +75,29 @@ public class Trace {
 		return numerator / denominator;
 	}
 	
+	/**Returns the kinetic energy for a given velocity v*/
+	public double getKineticEnergy(double v) {
+		return 0.5*m*v*v  +  0.5*m*c*v*v;
+   	}
+	
+	/**Returns the potential energy for a given value of x*/
+	public double getPotentialEnergy(double x) {
+		return m * Trace.G * func.eval(x);
+	}
+	
+	/**Returns the total energy for a given velocity v and value of x*/
+	public double getTotalEnergy(double v, double x) {
+		return getKineticEnergy(v) + getPotentialEnergy(x);
+	}
+	
+	
+	//Traces
 	/**Prints a trace of the experiment described by this Trace object using Eulers' Method twice*/
 	public void eulerTrace() {
 		// Set initial parameters
-		double iterations = 0;
-		double a = 0;
-		double x = x0;
-		double v = v0;
+		int iter = 0;
+		double eKin = 0, ePot = 0, eTot = 0;
+		double x = x0, v = v0, a = 0;
 		
 		//Used to compute simulation time
 		System.out.println("Start");
@@ -93,50 +105,48 @@ public class Trace {
 		
 		//Iterate until track is complete (x has reached its' end value)
 		while (x < domain[1]) {
-			a = getAccel(x);
+			//Increment iteration counter
+			iter++;
 			
-//			v = Integration.eulerMethod(v, a, step);
-//			x = Integration.eulerMethod(x, Math.cos(func.slopeAngle(x)), step);
-		
+			eKin = getKineticEnergy(v);
+			ePot = getPotentialEnergy(x);
+			eTot = getTotalEnergy(v, x);
+
+			a = getAccel(x);	
 			v = v + a * step;
 			x = x + v * Math.cos(func.slopeAngle(x)) * step;
 			
 			//Print iteration results
-			System.out.printf("a = %.8f\t\t v = %.8f\t\t x = %.8f\n", a, v, x);
-			
-			//Increment iteration counter
-			iterations++;
+			System.out.println(String.format("%d\t\ta = %.8f\t\t v = %.8f\t\t x = %.8f\t\t eKin = %.8f\t\t ePot = %.8f\t\t eTot = %.8f\t\t", iter, a, v, x, eKin, ePot, eTot).replace(',', '.'));
 		}
 		
 		//Print final result
 		System.out.println("\nFinished!");
-		System.out.printf("\nIterations: %.0f\nStep size (seconds): %s\nTotal time (seconds): %s\n",
-							iterations, step, iterations * step);
+		System.out.printf("\nIterations: %,d\nStep size (seconds): %s\nTotal time (seconds): %s\n", iter, step, iter * step);
 		
 		//Print computation time
 		Instant end = Instant.now();
-		System.out.printf("\nComputation time: %.3f seconds\n", (double) Duration.between(start, end).toMillis()/1000);
+		System.out.println(String.format("\nComputation time: %.3f seconds", (double) Duration.between(start, end).toMillis()/1000).replace(',', '.'));
 	}
 	
 	
+	//Other
 	public static void main(String[] args) throws FileNotFoundException {
+		//Expermient data
 		PolySpline polySpline = Interpolation.polynomialSplineInterpolation("C:\\Users\\Patrik\\git\\Patrik-Forked\\Physics Plotter\\src\\imports\\mass_A.txt");
-		
 		double minX = polySpline.getDomain()[0];		
-		double mass = 100;							//Mass of rolling object
-		double c = 0 ;					//Constant for calculating moment of inertia
+		double m = 10000;							//Mass of rolling object
+		double c = Trace.SPHERE;				//Constant for calculating moment of inertia
 		double v0 = 0;								//Initial velocity
 		double x0 = minX;							//Initial x-coordinate
 		double step = 0.0001;						//Step size for numerical integration (Eulers' method)
 		
 		//Initialize new experiment
-		Trace experiment = new Trace(polySpline, mass, c, v0, x0, step);
+		Trace experiment = new Trace(polySpline, m, c, v0, x0, step);
 		
 		//Print a trace using Eulers' method
 		experiment.eulerTrace();
 		
-//		System.out.println("\nEquations:");
-//		System.out.println(experiment.func.toString(true, true));
 	}
 	
 }

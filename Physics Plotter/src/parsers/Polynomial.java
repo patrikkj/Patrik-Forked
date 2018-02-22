@@ -1,6 +1,9 @@
 package parsers;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Polynomial {
@@ -136,19 +139,27 @@ public class Polynomial {
 			if (value == 0  &&  !includeZeroCoeffs) continue;
 			
 			if (value >= 0) stringBuilder.append('+');
-			stringBuilder.append(value);
-			stringBuilder.append('x');
+			Locale defaultFormat = Locale.getDefault();
+			DecimalFormatSymbols decFormatter = new DecimalFormatSymbols(defaultFormat);
+			decFormatter.setDecimalSeparator('.');
+			stringBuilder.append(String.format("%.7f", value).replace(',', '.'));
+			stringBuilder.append('x'); 
+			
 			
 			//Handle exponents
 			for (char c : String.valueOf(degree - i).toCharArray())
 				stringBuilder.append(unicodeMap.get(c));
+			
+			stringBuilder.append('\t'); 
+
 		}
 		
 		//Handle constant if any
 		if (coeffArray[degree] != 0) {
 			if (coeffArray[degree] >= 0) 
 				stringBuilder.append('+');
-			stringBuilder.append(coeffArray[degree]);
+//			stringBuilder.append(coeffArray[degree]);
+			stringBuilder.append(String.format("%.7f", coeffArray[degree]).replace(',', '.'));
 		}
 		
 		//Remove leading + if first element is positive

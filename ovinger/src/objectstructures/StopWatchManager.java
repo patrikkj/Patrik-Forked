@@ -31,7 +31,7 @@ public class StopWatchManager {
 		return stopWatch;
 	}
 	
-	/**Remove specified StopWatch from hashmap if existing*/
+	/**Remove specified StopWatch from hashmap if present*/
 	public void removeStopWatch(String name) {
 		map.remove(name);
 	}
@@ -60,11 +60,11 @@ public class StopWatchManager {
 	public Collection<StopWatch> getStartedWatches() {
 		//Filters collection of watches by given predicate
 		List<StopWatch> startedWatches = map.values()
-										  .stream()
-										  .filter(watch -> watch.isStarted())
-										  .collect(Collectors.toList());
+											.stream()
+											.filter(watch -> watch.isStarted())
+											.collect(Collectors.toList());
 		
-		//Returns filtered array as a collection
+		//Returns filtered collection
 		return startedWatches;
 	}
 	
@@ -72,11 +72,11 @@ public class StopWatchManager {
 	public Collection<StopWatch> getStoppedWatches() {
 		//Filters collection of watches by given predicate
 		List<StopWatch> stoppedWatches = map.values()
-				.stream()
-				.filter(watch -> watch.isStopped())
-				.collect(Collectors.toList());
+											.stream()
+											.filter(watch -> watch.isStopped())
+											.collect(Collectors.toList());
 		
-		//Returns filtered array as a collection
+		//Returns filtered collection
 		return stoppedWatches;
 	}
 	
@@ -84,15 +84,16 @@ public class StopWatchManager {
 	//Other
 	public static void main(String[] args) {
 		StopWatchManager manager = new StopWatchManager();
-		
+		System.out.println("First iteration");
+
 		manager.newStopWatch("SW1");
 		manager.newStopWatch("SW2");
 		
 		manager.tick(1);
 		Collection<StopWatch> list = manager.getAllWatches();
 		list.forEach(watch -> System.out.println(watch));
-		
-		System.out.println("Second iteration");
+				
+		System.out.println("\nSecond iteration");
 	
 		manager.tick(2);
 		Collection<StopWatch> list2 = manager.getAllWatches();
