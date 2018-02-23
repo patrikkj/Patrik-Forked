@@ -136,17 +136,16 @@ public class Trace {
 		PolySpline polySpline = Interpolation.polynomialSplineInterpolation("C:\\Users\\Patrik\\git\\Patrik-Forked\\Physics Plotter\\src\\imports\\mass_A.txt");
 		double minX = polySpline.getDomain()[0];		
 		double m = 10000;							//Mass of rolling object
-		double c = Trace.SPHERE;				//Constant for calculating moment of inertia
+		double c = Trace.SPHERE;					//Constant for calculating moment of inertia
 		double v0 = 0;								//Initial velocity
 		double x0 = minX;							//Initial x-coordinate
-		double step = 0.0001;						//Step size for numerical integration (Eulers' method)
+		double step = 0.00001;						//Step size for numerical integration (Eulers' method)
 		
 		//Initialize new experiment
 		Trace experiment = new Trace(polySpline, m, c, v0, x0, step);
 		
 		//Print a trace using Eulers' method
 		experiment.eulerTrace();
-		
 	}
 	
 }
