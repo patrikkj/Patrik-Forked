@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="897.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="517.0" prefWidth="161.0" style="-fx-background-color: #808080;">
+         <children>
+            <VBox>
+               <children>
+                  <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" prefWidth="116.0" text="New Project" VBox.vgrow="ALWAYS" />
+                  <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Save" />
+                  <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Load" />
+                  <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Import" />
+                  <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Export" />
+                  <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Settings" />
+               </children>
+            </VBox>
+            <Separator opacity="0.4">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </Separator>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Tracks">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <VBox>
+               <children>
+                  <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Track 1" />
+                  <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Track 2" />
+                  <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Track 3" />
+               </children>
+            </VBox>
+            <Separator opacity="0.4">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </Separator>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Graphs">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <VBox>
+               <children>
+                  <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Graph 1" />
+                  <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Graph 2" />
+                  <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Graph 3" />
+               </children>
+            </VBox>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets top="15.0" />
+         </padding>
+      </VBox>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+         <children>
+            <LineChart maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="600.0">
+               <xAxis>
+                  <CategoryAxis />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis side="LEFT" />
+               </yAxis>
+            </LineChart>
+         </children>
+      </VBox>
+   </children>
+</HBox>
