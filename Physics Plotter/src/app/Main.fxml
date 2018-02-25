@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="897.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="1127.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="517.0" prefWidth="161.0" style="-fx-background-color: #808080;">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" style="-fx-background-color: #808080;">
          <children>
             <VBox>
                <children>
@@ -35,7 +41,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <VBox>
+            <VBox fx:id="trackBox">
                <children>
                   <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Track 1" />
                   <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Track 2" />
@@ -52,7 +58,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <VBox>
+            <VBox fx:id="graphBox">
                <children>
                   <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Graph 1" />
                   <JFXButton alignment="BASELINE_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" text="Graph 2" />
@@ -69,14 +75,157 @@
       </VBox>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
          <children>
-            <LineChart maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="600.0">
-               <xAxis>
-                  <CategoryAxis />
-               </xAxis>
-               <yAxis>
-                  <NumberAxis side="LEFT" />
-               </yAxis>
-            </LineChart>
+            <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity">
+                     <children>
+                        <LineChart fx:id="lineChart" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0">
+                           <xAxis>
+                              <CategoryAxis fx:id="xAxis" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis fx:id="yAxis" side="LEFT" />
+                           </yAxis>
+                        </LineChart>
+                        <VBox prefHeight="200.0" prefWidth="200.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </StackPane>
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="30.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <GridPane HBox.hgrow="NEVER">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+                     </rowConstraints>
+                     <children>
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Chart" GridPane.columnSpan="2">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Title:" GridPane.rowIndex="1" />
+                        <JFXTextField alignment="BOTTOM_CENTER" prefWidth="100.0" promptText="My chart" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </JFXTextField>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Width:" GridPane.rowIndex="2" />
+                        <JFXTextField alignment="BOTTOM_CENTER" prefWidth="100.0" promptText="Auto" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </JFXTextField>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Height:" GridPane.rowIndex="3" />
+                        <JFXTextField alignment="BOTTOM_CENTER" prefWidth="100.0" promptText="Auto" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </JFXTextField>
+                     </children>
+                  </GridPane>
+                  <GridPane HBox.hgrow="NEVER">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+                     </rowConstraints>
+                     <children>
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="X-axis" GridPane.columnSpan="3">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Name" GridPane.rowIndex="1" />
+                        <JFXTextField alignment="BOTTOM_CENTER" prefWidth="100.0" promptText="My chart" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </JFXTextField>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Tick size:" GridPane.rowIndex="2" />
+                        <JFXTextField alignment="BOTTOM_CENTER" prefWidth="100.0" promptText="Auto" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </JFXTextField>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Range:" GridPane.rowIndex="3" />
+                        <JFXTextField alignment="BOTTOM_CENTER" prefWidth="50.0" promptText="Auto" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <padding>
+                              <Insets left="10.0" right="2.0" />
+                           </padding>
+                        </JFXTextField>
+                        <JFXTextField alignment="BOTTOM_CENTER" prefWidth="50.0" promptText="Auto" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                           <padding>
+                              <Insets left="5.0" right="10.0" />
+                           </padding>
+                        </JFXTextField>
+                     </children>
+                  </GridPane>
+                  <GridPane HBox.hgrow="NEVER">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+                     </rowConstraints>
+                     <children>
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Y-axis" GridPane.columnSpan="3">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Name" GridPane.rowIndex="1" />
+                        <JFXTextField alignment="BOTTOM_CENTER" prefWidth="100.0" promptText="My chart" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </JFXTextField>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Tick size:" GridPane.rowIndex="2" />
+                        <JFXTextField alignment="BOTTOM_CENTER" prefWidth="100.0" promptText="Auto" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </JFXTextField>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Range:" GridPane.rowIndex="3" />
+                        <JFXTextField alignment="BOTTOM_CENTER" prefWidth="50.0" promptText="Auto" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <padding>
+                              <Insets left="10.0" right="2.0" />
+                           </padding>
+                        </JFXTextField>
+                        <JFXTextField alignment="BOTTOM_CENTER" prefWidth="50.0" promptText="Auto" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                           <padding>
+                              <Insets left="5.0" right="10.0" />
+                           </padding>
+                        </JFXTextField>
+                     </children>
+                  </GridPane>
+                  <JFXComboBox />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
          </children>
       </VBox>
    </children>
