@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <LineChart layoutX="92.0" layoutY="14.0" prefHeight="306.0" prefWidth="572.0">
@@ -26,13 +25,43 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
-      <VBox prefHeight="623.0" prefWidth="72.0" style="-fx-background-color: #202020;" />
+      <VBox prefHeight="623.0" prefWidth="88.0" spacing="10.0" style="-fx-background-color: #500000;" styleClass="#292F3C">
+         <children>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="New project" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Save" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Load" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Export" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Properties" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding></VBox>
       <JFXButton buttonType="RAISED" focusTraversable="false" layoutX="725.0" layoutY="54.0" text="Chart" />
       <JFXButton buttonType="RAISED" layoutX="788.0" layoutY="54.0" style="-fx-background-color: #DDDDDD;" text="X-axis" />
       <JFXButton buttonType="RAISED" layoutX="853.0" layoutY="54.0" text="Y-axis" />
       <AnchorPane layoutX="92.0" layoutY="328.0" prefHeight="281.0" prefWidth="405.0">
          <children>
-            <Label layoutX="177.0" layoutY="1.0" text="Traces">
+            <Label layoutX="177.0" layoutY="1.0" text="Traces" textFill="#3e2723">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -41,6 +70,7 @@
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
@@ -95,7 +125,7 @@
                   </JFXTextField>
                </children>
             </GridPane>
-            <Separator focusTraversable="false" layoutX="405.0" orientation="VERTICAL" prefHeight="270.0" prefWidth="1.0" />
+            <Separator focusTraversable="false" layoutX="405.0" orientation="VERTICAL" prefHeight="270.0" />
             <GridPane layoutX="14.0" layoutY="59.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
