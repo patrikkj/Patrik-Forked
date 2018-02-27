@@ -1,8 +1,11 @@
-package objectstructures;
+package interfaces.twitter;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TwitterAccount {
 	//Instance variables
@@ -45,8 +48,16 @@ public class TwitterAccount {
 		return retweetCount;
 	}
 	
-	public int getFollowersCount() {
+	public int getFollowerCount() {
 		return followers.size();
+	}
+	
+	public Collection<TwitterAccount> getFollowers(Comparator<TwitterAccount> comparator) {
+		// Return original list 
+		if (comparator == null) return followers;
+		
+		//
+		return followers.stream().sorted(comparator).collect(Collectors.toList());
 	}
 	
 	public boolean isFollowing(TwitterAccount account) {
@@ -65,7 +76,7 @@ public class TwitterAccount {
 		following.add(account);
 		
 		//Additional method to handle followers in Øv. 6
-		account.followers.add(this);
+		account.addFollower(this);
 	}
 	
 	public void unfollow(TwitterAccount account) {
@@ -73,7 +84,17 @@ public class TwitterAccount {
 		following.remove(account);
 		
 		//Additional method to handle followers in Øv. 6
-		account.followers.remove(this);
+		account.removeFollower(this);
+	}
+	
+	//Additional method to handle followers in Øv. 6
+	public void addFollower(TwitterAccount account) {
+		followers.add(account);
+	}
+	
+	//Additional method to handle followers in Øv. 6
+	public void removeFollower(TwitterAccount account) {
+		followers.remove(account);
 	}
 	
 	public void tweet(String text) {
@@ -100,6 +121,15 @@ public class TwitterAccount {
 	
 	//Other
 	public static void main(String[] args) {
+		TwitterAccount acc1 = new TwitterAccount("Acc1");
+		TwitterAccount acc2 = new TwitterAccount("Acc1");
+		TwitterAccount acc3 = new TwitterAccount("Acc1");
 		
+		acc1.follow(acc3);
+		acc2.follow(acc3);
+		
+		System.out.println(acc1.getFollowerCount());
+		System.out.println(acc2.getFollowerCount());
+		System.out.println(acc3.getFollowerCount());
 	}
 }

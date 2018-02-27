@@ -9,7 +9,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 public class StringMergingIteratorProgram {
 
 	public static void main(String[] args) throws Exception {
-
+		System.out.println("hei");
 		Iterator<String> one = CollectionLiterals.<String>newArrayList("a", "b").iterator();
 		Iterator<String> two = CollectionLiterals.<String>newArrayList("c", "d", "e").iterator();
 		 
