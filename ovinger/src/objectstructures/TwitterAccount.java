@@ -90,10 +90,10 @@ public class TwitterAccount {
 		
 		//Increment retweet count of original tweet owner
 		if (originalTweet != null)
-			//If the tweet parent is not the original owner
+			//Executed if the tweet parent is not the original owner
 			originalTweet.getOwner().retweetCount++;
 		else 
-			//If this is the first retweet in the chain
+			//Executed if this is the first retweet in the chain
 			tweet.getOwner().retweetCount++;
 	}
 	
