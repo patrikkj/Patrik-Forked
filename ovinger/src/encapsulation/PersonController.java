@@ -44,8 +44,8 @@ public class PersonController {
 
 		//Set up default person
 		Person defaultPerson = new Person();
-		defaultPerson.setName("Patrik Kjærran");
-		defaultPerson.setEmail("patrik.kjærran@hotmail.no");
+		defaultPerson.setName("Patrik Kjarran");
+		defaultPerson.setEmail("patrik.kjarran@hotmail.no");
 		defaultPerson.setBirthday(new Date(97, 10, 24));  //Why is month 0-indexed??!
 		defaultPerson.setGender('M');
 		defaultPerson.setSSN("24119735315");
