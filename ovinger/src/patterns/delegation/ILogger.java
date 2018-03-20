@@ -1,4 +1,4 @@
-package delegation;
+package patterns.delegation;
  
 public interface ILogger {
     public String ERROR = "error", WARNING = "warning", INFO = "info";

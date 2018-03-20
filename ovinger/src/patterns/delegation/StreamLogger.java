@@ -1,4 +1,4 @@
-package delegation;
+package patterns.delegation;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;

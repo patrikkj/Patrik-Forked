@@ -1,4 +1,4 @@
-package delegation;
+package patterns.delegation;
 
 import java.util.HashMap;
 
@@ -26,7 +26,8 @@ public class DistributingLogger implements ILogger {
 		if (!isValidSeverity(severity))
 			throw new IllegalArgumentException("Severity " + severity + " is not valid.");
 		
-		
+		// Distribute log using logger map
+		loggerMap.get(severity).log(severity, message, exception);
 	}
 	
 	/**
