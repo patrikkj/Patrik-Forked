@@ -1,0 +1,14 @@
+Oppgave a)
+1. String, konkatinert string fra Stringbuilder-objekt.
+2. String + String = String gir boolean.
+3. int / int gir int, heltallsdivisjon
+4. String + char gir string, compile-time error.
+5. char - char gir int (ascii)
+
+Oppgave b)
+Høyresiden representerer den faktiske verdien til den deklarerte variablenen "strings".
+Venstresiden deklarerer variablenen "strings", samt angir feltets type.
+Det som står mellom < > forteller ArrayList-klassen sitt generiske type-argument 
+typen til elementene i den underliggende datastrukturen.
+
+

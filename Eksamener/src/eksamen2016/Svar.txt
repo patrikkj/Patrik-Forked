@@ -1,0 +1,4 @@
+Oppgave a)
+Hvilke modifikatorer bør stå foran deklarasjonen av label-feltet og konstruktøren? Begrunn svaret. 
+
+

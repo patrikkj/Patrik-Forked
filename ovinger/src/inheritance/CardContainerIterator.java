@@ -24,7 +24,7 @@ public class CardContainerIterator implements Iterator<Card>{
 	}
 
 	@Override
-	public Card next() throws NoSuchElementException{
+	public Card next() throws NoSuchElementException {
 		// Break if iterator is exhausted
 		if (!hasNext()) 
 			throw new NoSuchElementException("Iterator is exhausted.");

@@ -17,6 +17,16 @@ public class CardContainerImpl implements CardContainer {
 	
 	
 	/**
+	 * Adds card to card container if size does not exceed max size
+	 */
+	public void addCard(Card card) {
+		if (getCardCount() >= maxCardCount)
+			throw new IllegalStateException("Container cannot exceed max size.");
+		
+		cards.add(card);
+	}
+	
+	/**
 	 * Returns number of cards in container.
 	 */
 	public int getCardCount() {
@@ -28,9 +38,19 @@ public class CardContainerImpl implements CardContainer {
 	 * @param n - card index in collection
 	 */
 	public Card getCard(int n) {
+		if (n < 0  ||  n >= cards.size())
+			throw new IllegalArgumentException("Invalid card index.");
+		
 		return cards.get(n);
 	}
 
+	/**
+	 * Returns the maximum number of cards this container can contain.
+	 */
+	public int getMaxCardCount() {
+		return maxCardCount;
+	}
+	
 	
 	@Override
 	public Iterator<Card> iterator() {

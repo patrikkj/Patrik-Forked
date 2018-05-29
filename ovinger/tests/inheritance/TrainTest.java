@@ -2,7 +2,7 @@ package inheritance;
 
 import inheritance.CargoCar;
 import inheritance.PassengerCar;
-import inheritance.Train;
+import inheritance.TrainCar;
 import junit.framework.TestCase;
 import no.hal.jex.runtime.JExercise;
 
