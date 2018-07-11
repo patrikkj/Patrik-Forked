@@ -5,7 +5,7 @@ import java.util.*;
 public class CardDeck {
 	//Declarations
 	private ArrayList<Card> cardArrList = new ArrayList<Card>();
-	private static final char[] validSuits = { 'S', 'H', 'D', 'C' };
+	private static final char[] VALID_SUITS = { 'S', 'H', 'D', 'C' };
 	
 	
 	//Constructor
@@ -33,7 +33,6 @@ public class CardDeck {
 	public void shufflePerfectly() {
 		int splitIndex = cardArrList.size() / 2;
 		
-		//Possible to use arrList.clone() ?
 		ArrayList<Card> tempArrList = new ArrayList<Card>();
 		List<Card> cardList1 = cardArrList.subList(0, splitIndex);
 		List<Card> cardList2 = cardArrList.subList(splitIndex, cardArrList.size());

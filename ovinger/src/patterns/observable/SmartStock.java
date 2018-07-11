@@ -5,10 +5,10 @@ import java.util.Map;
 
 public class SmartStock extends Stock {
 	// Difference listener, Array format: [difference, reportedPrice]
-	private HashMap<StockListener, double[]> differenceListeners = new HashMap<>(); 
+	private Map<StockListener, double[]> differenceListeners = new HashMap<>(); 
 	
 	// Interval listener, Array format: [min, max]
-	private HashMap<StockListener, double[]> intervalListeners = new HashMap<>(); 
+	private Map<StockListener, double[]> intervalListeners = new HashMap<>(); 
 	
 	
 	// Constructor

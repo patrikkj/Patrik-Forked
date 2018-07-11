@@ -6,12 +6,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class CalculatorController {
-	private Calculator calc;
+	@FXML private Calculator calc;
 	
     @FXML private Label historyLabel;
     @FXML private Label valueLabel;
 
-    
     @FXML private void initialize() {
     	//Initialize default Calculator object.
     	calc = new Calculator();
@@ -43,6 +42,7 @@ public class CalculatorController {
     	valueLabel.setText(displayText);
     	System.out.println(calc);
     }
+    
     
     
     @FXML private void handleClearButtonClick(ActionEvent event) {

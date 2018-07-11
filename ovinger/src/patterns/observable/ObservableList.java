@@ -3,11 +3,12 @@ package patterns.observable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public abstract class ObservableList<T> {
 	// Fields
 	protected final List<T> elements = new ArrayList<>();
-	private final HashSet<ObservableListListener<T>> listeners = new HashSet<>();
+	private final Set<ObservableListListener<T>> listeners = new HashSet<>();
 	
 	
 	// Methods

@@ -1,6 +1,8 @@
 package patterns.observable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -9,6 +11,7 @@ public class StockIndex implements StockListener{
 	private final String name;
 	private Set<Stock> stocks;
 	private double index;
+	private Map<String, Integer> values = new HashMap<>();
 	
 	
 	// Constructor

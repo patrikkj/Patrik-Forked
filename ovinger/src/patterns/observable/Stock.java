@@ -1,12 +1,13 @@
 package patterns.observable;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class Stock {
 	// Fields
 	private final String ticker;
 	private double price;
-	private HashSet<StockListener> listeners = new HashSet<>();
+	private Set<StockListener> listeners = new HashSet<>();
 	
 	
 	// Constructor

@@ -1,11 +1,12 @@
 package patterns.observable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class HighscoreList {
+public class HighscoreList{
 	// Fields
 	private List<Integer> highscores = new ArrayList<>();
 	private HashSet<HighscoreListListener> listeners = new HashSet<>();

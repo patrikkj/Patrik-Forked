@@ -17,11 +17,11 @@ public class ObservableHighscoreList extends ObservableList<Integer> {
 		int count = (int) elements.stream().filter(e -> e <= result).count();
 		
 		// Break if element does not qualify
-		if (count == maxSize) return;
+		if (count >= maxSize) return;
 		
 		// Trim list (prior to adding element, preventing listeners from updating maxSize + 1 list)
 		if (size() == maxSize) removeElement(getElement(size() - 1));
-			
+		
 		// Add element
 		addElement(count, result);
 	}

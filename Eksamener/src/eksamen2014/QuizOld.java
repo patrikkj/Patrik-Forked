@@ -9,9 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Quiz {
+public class QuizOld {
 	
-	private List<Question> questions = new ArrayList<>();
+	private List<QuestionOld> questions = new ArrayList<>();
 	
 	
 	public void init(File file) throws IOException {
@@ -31,11 +31,11 @@ public class Quiz {
 				line = reader.readLine();
 			}
 			
-			addQuestion(new Question(question, answer, options));
+			addQuestion(new QuestionOld(question, answer, options));
 		}
 	}
 	
-	public void addQuestion(Question question) {
+	public void addQuestion(QuestionOld question) {
 		questions.add(question);
 	}
 	
@@ -43,7 +43,7 @@ public class Quiz {
 		Scanner scanner = new Scanner(System.in);
 		String input = null;
 		
-		for (Question question : questions) {
+		for (QuestionOld question : questions) {
 			question.askQuestion(System.out);
 			
 			while (scanner.hasNextLine()) {
@@ -61,12 +61,12 @@ public class Quiz {
 	
 	
 	public static void main(String[] args) {
-		Question q1 = new Question("Hva er meningen med livet?", "Ostepop");
-		Question q2 = new Question("Hvor mange dager er det i en uke?", "7");
-		Question q3 = new Question("Hvilket år sluttet andre verdenskrig?", "1945");
-		Question q4 = new Question("Hvor gammel er jeg?", "20", Arrays.asList(new String[] {"18", "19", "20"}));
+		QuestionOld q1 = new QuestionOld("Hva er meningen med livet?", "Ostepop");
+		QuestionOld q2 = new QuestionOld("Hvor mange dager er det i en uke?", "7");
+		QuestionOld q3 = new QuestionOld("Hvilket år sluttet andre verdenskrig?", "1945");
+		QuestionOld q4 = new QuestionOld("Hvor gammel er jeg?", "20", Arrays.asList(new String[] {"18", "19", "20"}));
 		
-		Quiz quiz = new Quiz();
+		QuizOld quiz = new QuizOld();
 		
 		quiz.addQuestion(q1);
 		quiz.addQuestion(q2);
